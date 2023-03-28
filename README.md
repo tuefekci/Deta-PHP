@@ -108,6 +108,7 @@ The `Drive` class provides the following methods:
 - `abortChunkedUpload($upload_id, $name)`: aborts a chunked upload to Deta Drive
 - `get($name)`: retrieves a file from Deta Drive
 - `list($limit = null, $prefix = null, $last = null)`: lists files in Deta Drive
+- `delete($name)`: deletes a file from Deta Drive by name
 
 ### Namespace
 All classes are defined in the `tuefekci\deta` namespace. To use the SDK in your PHP code, include the following statement:

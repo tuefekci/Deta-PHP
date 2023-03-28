@@ -27,7 +27,10 @@ $items = [
     ],
     [
         'key' => 'item2',
-        'value' => 'value2'
+        'value' => 'value1'
+    ],
+    [
+        'value' => date('Y-m-d H:i:s')
     ]
 ];
 $response = $base->put($items);

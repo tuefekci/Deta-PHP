@@ -1,5 +1,5 @@
 {
-    "name": "tuefekci/deta-php",
+    "name": "tuefekci/deta",
     "type": "library",
     "autoload": {
         "psr-4": {

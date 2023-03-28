@@ -34,6 +34,7 @@
         }
     },
     "require": {
-        "guzzlehttp/guzzle": "^7.5"
+        "guzzlehttp/guzzle": "^7.5",
+        "psr/log": "^3.0"
     }
 }

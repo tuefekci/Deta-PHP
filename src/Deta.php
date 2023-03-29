@@ -8,9 +8,22 @@ class Deta {
     private $api_key;
     private $options;
 
-	public function __construct(string $project_id, string $api_key, array $options=[]) {
+	public function __construct(string $project_id="", string $api_key="", array $options=[]) {
+
+		if($project_id == "" && isset($_ENV['DETA_PROJECT_ID'])) {
+			$project_id = $_ENV['DETA_PROJECT_ID'];
+		}
+
+		if($api_key == "" && isset($_ENV['DETA_API_KEY'])) {
+			$api_key = $_ENV['DETA_API_KEY'];
+		}
+
 		$this->project_id = $project_id;
 		$this->api_key = $api_key;
+
+		if($this->project_id == "" || $this->api_key == "") {
+			throw new \Exception("Project ID and API Key are required");
+		}
 
 		// Create a new Guzzle client with the handler stack
         $this->options = [

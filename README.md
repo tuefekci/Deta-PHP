@@ -19,6 +19,12 @@ use tuefekci\deta\Deta;
 $deta = new Deta('your_project_id', 'your_api_key');
 ```
 
+If you have set ENV Variables or ar in a Deta Micro you can leave the keys out.
+```php
+use tuefekci\deta\Deta;
+$deta = new Deta();
+```
+
 Then, you can use the `base` method to get a reference to a base in your project:
 
 ```php

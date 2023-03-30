@@ -19,7 +19,7 @@ use tuefekci\deta\Deta;
 $deta = new Deta('your_project_id', 'your_api_key');
 ```
 
-If you have set ENV Variables or ar in a Deta Micro you can leave the keys out.
+If you have set ENV Variables or are in a Deta Micro you can leave the keys out.
 ```php
 use tuefekci\deta\Deta;
 $deta = new Deta();

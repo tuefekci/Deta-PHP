@@ -63,8 +63,7 @@ And then use the methods on the drive to interact with the files stored in the d
 $my_drive->put('file.txt', 'Hello, world!');
 
 // Download a file
-$file = $my_drive->get('file.txt');
-$content = $file->getBody()->getContents();
+$content = $my_drive->get('file.txt');
 
 // List files
 $files = $my_drive->list();

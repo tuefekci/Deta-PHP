@@ -10,39 +10,70 @@ class Drive {
         $this->client = $client;
     }
 
+	private function handleResponse($response, $acceptedStatus = 200) {
+
+		switch ($response->getStatusCode()) {
+			case $acceptedStatus:
+				if (!empty($response->getHeader('content-type')) && strpos($response->getHeader('content-type')[0], 'application/json') !== false) {
+					return json_decode($response->getBody()->getContents());
+				} else {
+					return $response->getBody()->getContents();
+				}
+				break;
+			case 400:
+			case 404:
+				return throw new \Exception(json_decode($response->getBody()->getContents()));
+				break;
+			default:
+				return throw new \Exception($response->getBody()->getContents());
+				break;
+		}
+	}
+
     public function put($name, $content, $content_type = null) {
         $url = "files?name={$name}";
         $options = ['body' => $content];
         if ($content_type !== null) {
             $options['headers']['Content-Type'] = $content_type;
         }
-        return $this->client->post($url, $options);
+		$response = $this->client->post($url, $options);
+        return $this->handleResponse($response, 201);
     }
 
     public function initializeChunkedUpload($name) {
         $url = "uploads?name={$name}";
-        return $this->client->post($url);
+        $response = $this->client->post($url);
+
+		return $this->handleResponse($response, 202);
     }
 
     public function uploadChunkedPart($upload_id, $name, $part, $content) {
         $url = "uploads/{$upload_id}/parts?name={$name}&part={$part}";
         $options = ['body' => $content];
-        return $this->client->post($url, $options);
+        $response = $this->client->post($url, $options);
+
+		return $this->handleResponse($response, 200);
     }
 
     public function endChunkedUpload($upload_id, $name) {
         $url = "uploads/{$upload_id}?name={$name}";
-        return $this->client->patch($url);
+        $response = $this->client->patch($url);
+
+		return $this->handleResponse($response, 200);
     }
 
     public function abortChunkedUpload($upload_id, $name) {
         $url = "uploads/{$upload_id}?name={$name}";
-        return $this->client->delete($url);
+        $response = $this->client->delete($url);
+
+		return $this->handleResponse($response, 200);
     }
 
     public function get($name) {
         $url = "files/download?name={$name}";
-        return $this->client->get($url);
+        $response = $this->client->get($url);
+
+		return $this->handleResponse($response, 200);
     }
 
     public function list($limit = null, $prefix = null, $last = null) {
@@ -57,13 +88,19 @@ class Drive {
             $query_params['last'] = $last;
         }
         $url = 'files?' . http_build_query($query_params);
-        return $this->client->get($url);
+        $response = $this->client->get($url);
+
+		return $this->handleResponse($response, 200);
     }
 
     public function delete($names) {
+		$names = is_array($names) ? $names : [$names];
+
         $url = 'files';
         $data = ['names' => $names];
         $options = ['json' => $data];
-        return $this->client->delete($url, $options);
+        $response = $this->client->delete($url, $options);
+
+		return $this->handleResponse($response, 200);
     }
 }

@@ -15,7 +15,7 @@ require_once __DIR__ . DIRECTORY_SEPARATOR . '..' . DIRECTORY_SEPARATOR . 'vendo
 $dotenv = Dotenv\Dotenv::createImmutable(__DIR__ . DIRECTORY_SEPARATOR .'..');
 $dotenv->load();
 
-$deta = new \tuefekci\deta\Deta($_ENV['DETA_PROJECT_KEY'], $_ENV['DETA_API_KEY']);
+$deta = new \tuefekci\deta\Deta();
 
 // Create an instance of the Drive class
 $drive = $deta->drive('test');

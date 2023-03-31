@@ -12,6 +12,8 @@ class Deta {
 
 		if($project_id == "" && isset($_ENV['DETA_PROJECT_ID'])) {
 			$project_id = $_ENV['DETA_PROJECT_ID'];
+		}elseif($project_id == "" && isset($_ENV['DETA_SPACE_APP_INSTANCE_ID'])) {
+			$project_id = $_ENV['DETA_SPACE_APP_INSTANCE_ID'];
 		}
 
 		if($api_key == "" && isset($_ENV['DETA_API_KEY'])) {

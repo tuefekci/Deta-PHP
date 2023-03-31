@@ -1,6 +1,8 @@
 # Deta PHP
 This is a PHP client for the [Deta](https://deta.sh/) API.
 
+Explore the Client Deta Space via https://deta.space/discovery/@tuefekci/phpsandbox
+
 ## Installation
 
 You can install the package via composer:

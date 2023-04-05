@@ -18,6 +18,8 @@ class Deta {
 
 		if($api_key == "" && isset($_ENV['DETA_API_KEY'])) {
 			$api_key = $_ENV['DETA_API_KEY'];
+		}elseif($api_key == "" && isset($_ENV['DETA_PROJECT_KEY'])) {
+			$api_key = $_ENV['DETA_PROJECT_KEY'];
 		}
 
 		$this->project_id = $project_id;
